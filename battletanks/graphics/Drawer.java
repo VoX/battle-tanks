@@ -496,6 +496,10 @@ public class Drawer {
 
 	public void drawUIText(TextRenderer renderer) {
 		// renderer.draw("HEALTH", 30, height - 25);
+		renderer.draw("Press Q to quit ",
+				10, height - 45);
+		
+		
 		renderer.draw("WAVE: " + Gamestate.getInstance().getWave(),
 				width - 350, height - 45);
 		if (Gamestate.getInstance().getWave() == 0) {

@@ -31,11 +31,12 @@ import com.sun.opengl.util.gl2.GLUT;
 import java.nio.ByteBuffer;
 
 public class TanksMain extends Frame implements GLEventListener, KeyListener,
-		MouseListener, MouseMotionListener, ActionListener {
+		MouseListener, MouseMotionListener, ActionListener{
 
 	// mouse control variables
+	private boolean isfocused = true;
 	private boolean debugOut = false;
-	boolean fullscreen = true;
+	boolean fullscreen = false;
 	private final GLCanvas canvas;
 	private int winW = 1440, winH = 900;
 	private Point center = new Point(winW / 2, winH / 2);;
@@ -61,8 +62,10 @@ public class TanksMain extends Frame implements GLEventListener, KeyListener,
 		canvas.addMouseMotionListener(this);
 		canvas.setFocusable(true);
 		this.add(canvas);
+		if(fullscreen == true)
+			setUndecorated(true);
 
-		setUndecorated(true);
+		
 		setSize(winW, winH);
 
 		Toolkit t = Toolkit.getDefaultToolkit();
@@ -77,13 +80,13 @@ public class TanksMain extends Frame implements GLEventListener, KeyListener,
 		canvas.requestFocus();
 
 		if (fullscreen == true) {
-
+			
 			GraphicsEnvironment ge = GraphicsEnvironment
 					.getLocalGraphicsEnvironment();
 
 			ge.getDefaultScreenDevice().setFullScreenWindow(this);
 		} else {
-			setUndecorated(false);
+			
 
 			// this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		}
@@ -97,16 +100,20 @@ public class TanksMain extends Frame implements GLEventListener, KeyListener,
 
 			e.printStackTrace();
 		}
+		center = new Point(r.x + r.width / 2, r.y + r.height / 2);
 	}
 
 	// gl display function
 	public void display(GLAutoDrawable drawable) {
 		Point mousepos = MouseInfo.getPointerInfo().getLocation();
 
-		int mousex = center.x - mousepos.x;
-		int mousey = center.y - mousepos.y;
-		if (robot != null)
+		int mousex = 0;
+		int mousey = 0;
+		if (robot != null && isfocused == true ){
+			 mousex = center.x - mousepos.x;
+			 mousey = center.y - mousepos.y;
 			robot.mouseMove(center.x, center.y);
+		}
 		Gamestate.getInstance().AddInput(
 				new GameInput(INPUT_TYPE.VIEWX, mousex));
 		Gamestate.getInstance().AddInput(
@@ -229,6 +236,9 @@ public class TanksMain extends Frame implements GLEventListener, KeyListener,
 		case KeyEvent.VK_F1:
 			Gamestate.getInstance().reset();
 			break;
+		case KeyEvent.VK_F5:
+			isfocused = !isfocused;
+			break;
 
 		}
 
@@ -275,6 +285,7 @@ public class TanksMain extends Frame implements GLEventListener, KeyListener,
 			Gamestate.getInstance().AddInput(
 					new GameInput(INPUT_TYPE.FIRE_RELEASED));
 			break;
+
 		}
 	}
 

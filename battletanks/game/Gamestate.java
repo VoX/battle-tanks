@@ -58,7 +58,7 @@ public class Gamestate {
 		if (wave == 0) {
 			setUpMap();
 			Tank et = new Tank();
-			et.setController(new DemoController(et));
+			et.setController(new PlayerTankController(et));
 	
 			Vector3f pos = new Vector3f(-.75f,0,-4);
 	
@@ -239,12 +239,12 @@ public class Gamestate {
 			CollisionResult c = new CollisionResult();
 			Vector3f max = new Vector3f(0, 0, 0);
 			for (CollisionResult r : tankObjCol) {
-				if (r.getOverlapVector().x > max.x) {
+				if (Math.abs(r.getOverlapVector().x) > Math.abs(max.x)) {
 					max.x = r.getOverlapVector().x;
 					c.collidedWith = r.getCollided();
 				}
-				if (r.getOverlapVector().y > max.y) {
-					max.y = r.getOverlapVector().y;
+				if (Math.abs(r.getOverlapVector().z) > Math.abs(max.z)) {
+					max.z = r.getOverlapVector().z;
 				}
 			}
 			c.setVector(max);
@@ -306,8 +306,8 @@ public class Gamestate {
 				max.x = r.getOverlapVector().x;
 				c.collidedWith = r.getCollided();
 			}
-			if (Math.abs(r.getOverlapVector().y) > Math.abs(max.y)) {
-				max.y = r.getOverlapVector().y;
+			if (Math.abs(r.getOverlapVector().z) > Math.abs(max.z)) {
+				max.y = r.getOverlapVector().z;
 			}
 		}
 		c.setVector(max);
@@ -469,6 +469,8 @@ public class Gamestate {
 		Gamestate.instance = new Gamestate(startTankCount, 2);
 
 	}
+
+
 
 	private static Gamestate instance = null;
 

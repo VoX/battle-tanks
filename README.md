@@ -3,7 +3,7 @@ battle-tanks
 
 ###Description
 
-tank game for graphics final project
+Tank game for graphics final project, visit http://www.youtube.com/watch?v=CsfUeyWaL-o for a demo video
 
 
 ### Dependencies 
@@ -27,7 +27,7 @@ tank game for graphics final project
 ### Releases
 
 *	32-bit Windows
-	https://mega.co.nz/#!IxRTyARK!OfwGvyGHIJfFr5BtvW4DI1k1DtFjoTUkoeRLF6Isk8w
+	https://mega.co.nz/#!Z0AgnJbT!atR-V0hmrn6Uz0T9Ww44yDMVdhNyExaErffJJxjSYkg
 
 *	64-bit Windows
-	https://mega.co.nz/#!95ZhiayC!FPPiEAlMYu4Ja8JELn9zcX84SAIIXldHU0evBHJM3tw
+	https://mega.co.nz/#!F5gzRZwA!XsEQP1YXe5NCA_aBNp8VWiATtVQXzAzSLnSzbSUt4gg
